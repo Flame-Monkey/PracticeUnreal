@@ -6,7 +6,10 @@
 #include "EnhancedInputComponent.h"
 #include "Slate/MySlate.h"
 
-AMyController::AMyController()
+#include "Network/ChattingClient.h"
+
+AMyController::AMyController():
+	Client()
 {
 
 }
@@ -19,6 +22,9 @@ void AMyController::BeginPlay()
 	InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 
 	SetInputMode(InputMode);
+	Client.Init();
+	Client.Connect("127.0.0.1", 5000);
+	Client.Login("Jin");
 }
 
 void AMyController::OpenChat(const FInputActionValue& Value)

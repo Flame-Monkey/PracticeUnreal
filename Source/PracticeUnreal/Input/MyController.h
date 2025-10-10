@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Network/ChattingClient.h"
 #include "MyController.generated.h"
 
 
@@ -11,6 +12,8 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class SMySlate;
+
+class ChattingClient;
 /**
  * 
  */
@@ -37,6 +40,8 @@ protected:
 	UInputAction* ChatAction;
 
 	TSharedPtr<SMySlate> MyUI;
+
+	ChattingClient Client;
 
 public:
 	AMyController();
