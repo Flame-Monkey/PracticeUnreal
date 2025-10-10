@@ -35,7 +35,7 @@ namespace Message
 
 		bool TransferByte(const char* data, unsigned int size);
 		bool GetQueuedMessage(StructMessage*& outMessage);
-		bool GetSendBuffer(StructMessage message, char*& outMessageBuffer, unsigned long &outMessageLength);
+		bool GetSendBuffer(StructMessage message, char*& outMessageBuffer, unsigned long& outMessageLength);
 
 		void ReleaseMessageBuffer(char* buffer);
 		void Reset();

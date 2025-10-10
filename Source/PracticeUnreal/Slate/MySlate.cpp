@@ -2,6 +2,7 @@
 
 
 #include "MySlate.h"
+#include "Input/MyController.h"
 
 #include "SlateOptMacros.h"
 
@@ -137,6 +138,11 @@ FReply SMySlate::OnKeyDown(const FGeometry& MeGeometry, const FKeyEvent& InKeyEv
 	return FReply::Unhandled();
 }
 
+void SMySlate::SetController(TWeakObjectPtr<AMyController> Controller)
+{
+	OwnerController = Controller;
+}
+
 void SMySlate::OpenChatting()
 {
 	if (ChatInput.IsValid())
@@ -150,6 +156,10 @@ void SMySlate::ChatCommitted(const FText& Text, ETextCommit::Type CommitType)
 {
 	if (CommitType == ETextCommit::OnEnter)
 	{
+		if (OwnerController.IsValid())
+		{
+			OwnerController->SendChat(Text);
+		}
 		UE_LOG(LogTemp, Warning, TEXT("Chat Text Committed: %s"), *Text.ToString());
 		ChatInput->SetText(FText::GetEmpty());
 	}

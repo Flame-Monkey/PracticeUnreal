@@ -10,6 +10,7 @@
  */
 
 class SButton;
+class AMyController;
 
 class PRACTICEUNREAL_API SMySlate : public SCompoundWidget
 {
@@ -20,12 +21,15 @@ public:
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
+	void SetController(TWeakObjectPtr<AMyController> Controller);
 
 	void OpenChatting();
 
 protected:
 	FReply OnMyButtonClicked();
 	FReply SettingButtonClicked();
+
+	TWeakObjectPtr<AMyController> OwnerController;
 
 	TSharedPtr<SButton> SettingButton;
 	TSharedPtr<SButton> PlayerInfoButton;

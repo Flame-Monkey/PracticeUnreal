@@ -8,7 +8,7 @@
 
 #include "Network/ChattingClient.h"
 
-AMyController::AMyController():
+AMyController::AMyController() :
 	Client()
 {
 
@@ -25,6 +25,13 @@ void AMyController::BeginPlay()
 	Client.Init();
 	Client.Connect("127.0.0.1", 5000);
 	Client.Login("Jin");
+}
+
+void AMyController::SendChat(const FText& Chat)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Chat Text Committed: %s"), *Chat.ToString());
+	std::string StdChatString(TCHAR_TO_ANSI(*Chat.ToString()));
+	Client.SendChat(StdChatString);
 }
 
 void AMyController::OpenChat(const FInputActionValue& Value)
@@ -49,5 +56,12 @@ void AMyController::SetupInputComponent()
 	}
 
 	MyUI = SNew(SMySlate);
+	MyUI->SetController(this);
 	GEngine->GameViewport->AddViewportWidgetContent(MyUI.ToSharedRef(), 10);
+}
+
+void AMyController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	Client.Disconnect();
 }

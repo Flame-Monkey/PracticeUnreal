@@ -14,7 +14,6 @@ namespace Message
 		const unsigned int TotalBufferSize;
 
 		unsigned long long ChannelSize;
-		bool IsInited;
 
 		std::pair<std::stack<char*>, std::mutex*> *FreeBufferChannel;
 

@@ -28,6 +28,8 @@ protected:
 
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 	void OpenChat(const FInputActionValue& Value);
 	
 	UPROPERTY(EditAnywhere, Category = "Input|Input Mapping")
@@ -45,4 +47,5 @@ protected:
 
 public:
 	AMyController();
+	void SendChat(const FText& Chat);
 };

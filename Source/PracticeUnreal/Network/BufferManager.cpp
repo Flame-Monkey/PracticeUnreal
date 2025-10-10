@@ -7,8 +7,7 @@ Message::BufferManager::BufferManager(unsigned int messageSize, unsigned int max
 	MaxMessageSize(maxMessageSize),
 	TotalBufferSize(messageSize * maxMessageSize),
 	ChannelSize(channelSize),
-	FreeBufferChannel(nullptr),
-	IsInited(false)
+	FreeBufferChannel(nullptr)
 {
 }
 
@@ -31,12 +30,11 @@ void Message::BufferManager::Init()
 		char* BufferAddress = this->Bufferpool + (i * MessageBufferSize);
 		FreeBufferChannel[ChannelIndex].first.push(BufferAddress);
 	}
-	IsInited = true;
 }
 
 Message::BufferManager::~BufferManager()
 {
-	if (FreeBufferChannel)
+	if (Bufferpool)
 	{
 		for (unsigned long long i = 0; i < ChannelSize; ++i)
 		{
